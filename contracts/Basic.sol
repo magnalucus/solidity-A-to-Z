@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.21;
 
 contract Basic {
     address public owner;
@@ -59,21 +59,21 @@ contract Basic {
     // sample callback function, payable, no Visibility {external, public, internal, private}
     function() public payable {
         c = 5;
-        Logging(helloWorld());  // emit Logging(log); from pragma solidity ^0.4.21
-        Logging(msg.value);
+        emit Logging(helloWorld());  // emit Logging(log); from pragma solidity ^0.4.21
+        emit Logging(msg.value);
     }
 
     // sample modifier
     modifier makeLog() {
-        Logging("start modifier");
+        emit Logging("start modifier");
         _;  // <- entry point
-        Logging("end modifier");
+        emit Logging("end modifier");
     }
     
     // sample function for check how modifier work 
     function checkModifier() public makeLog {
         // Logging("start modifier");  // by modifier
-        Logging("Logging in function");  // _;  entry point
+        emit Logging("Logging in function");  // _;  entry point
         // Logging("end modifier");  // by modifier
     }
     
